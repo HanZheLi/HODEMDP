@@ -337,6 +337,23 @@ def gen_sparse_directed_H_poi(users_trajs_dict, num_pois):
 
     return H
 
+def gen_sparse_directed_H_poi_intra_session(sessions_dict, num_pois):
+    """
+    Generate directed poi-poi incidence matrix for hypergraph
+    Rows: source POIs
+    Columns: target POIs
+    """
+    H = np.zeros(shape=(num_pois, num_pois))
+    for userID, sessions in sessions_dict.items(): 
+        for session in sessions:
+            for src_idx in range(len(session) - 1):
+                for tar_idx in range(src_idx + 1, len(session)):
+                    src_poi = session[src_idx]
+                    tar_poi = session[tar_idx]
+                    H[src_poi, tar_poi] = 1
+    H = sp.csr_matrix(H)
+
+    return H
 
 def gen_HG_from_sparse_H(H, conv="sym"):
     """Generate hypergraph with sparse incidence matrix"""
