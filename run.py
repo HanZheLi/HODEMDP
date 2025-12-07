@@ -15,7 +15,6 @@ from model import *
 from metrics import batch_performance
 from utils import *
 
-
 # clear cache
 torch.cuda.empty_cache()
 torch.backends.cudnn.benchmark = True
