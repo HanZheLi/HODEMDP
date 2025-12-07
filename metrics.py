@@ -18,7 +18,6 @@ def ndcg_k(y_pred, y_true, k):
     else:
         return 0
 
-
 def mAP_metric(y_true_seq, y_pred_seq, k):
     rlt = 0
     for y_true, y_pred in zip(y_true_seq, y_pred_seq):
