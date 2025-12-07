@@ -23,15 +23,15 @@ class U2P_ODEFunc(nn.Module):
 
     def forward(self, t, x):
         A = torch.sparse.mm(self.HG_pu,self.HG_up)
-        I = torch.eye(A.shape[0]).to_sparse_coo().cuda() # 有这个效果更好
+        I = torch.eye(A.shape[0]).to_sparse_coo().cuda() 
         propag_pois_embs = torch.sparse.mm(A-I, x)
 
-        # 下面这三行是测试加上W后的
+
         # d = torch.clamp(self.d, min=0, max=1)
         # w = torch.mm(self.w * d, torch.t(self.w))
         # propag_pois_embs = torch.sparse.mm(propag_pois_embs, w)
 
-        f = propag_pois_embs + self.e # 一定要加初始表征
+        f = propag_pois_embs + self.e
         return f
 
 class U2P_ODEEncoder(nn.Module):
@@ -44,9 +44,9 @@ class U2P_ODEEncoder(nn.Module):
 
     def forward(self, all_embeddings,HG_up,HG_pu):
         t = self.t.type_as(all_embeddings)
-        self.odefunc1hop.save_HG(HG_up,HG_pu) # 获取关联矩阵
-        self.odefunc1hop.update_e(all_embeddings) # 这一步就是set x0
-        z1 = odeint(self.odefunc1hop, all_embeddings, t, method=self.solver)[1] # 虽然这里的t是torch.tensor([0,t])，但求解器内部实际上会自适应选择多个点。
+        self.odefunc1hop.save_HG(HG_up,HG_pu) 
+        self.odefunc1hop.update_e(all_embeddings)
+        z1 = odeint(self.odefunc1hop, all_embeddings, t, method=self.solver)[1] 
         return z1
 
 
