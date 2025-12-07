@@ -57,6 +57,7 @@ class POIDataset(Dataset):
 
         # generate directed transitional hypergraph
         self.H_poi_src = gen_sparse_directed_H_poi(self.users_trajs_dict, num_pois)    # [L, L]
+        # self.H_poi_src = gen_sparse_directed_H_poi_intra_session(self.sessions_dict, num_pois)
         # drop edge on csr_matrix H_pu
         self.H_poi_src = csr_matrix_drop_edge(self.H_poi_src, args.keep_rate_poi)
         self.Deg_H_poi_src = get_hyper_deg(self.H_poi_src)    # [L, L]
