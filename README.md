@@ -1,7 +1,7 @@
 # HODE-MDP
 The repository for Hypergraph ODE-based Multi-aspect User Dynamic Preference Modeling for Next POI Recommendation.
 
-## Requirements
+## Requirements 
 
 + Pytorch 1.13.0
 + torchdiffeq 0.2.3
