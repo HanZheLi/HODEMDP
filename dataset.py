@@ -4,7 +4,6 @@ from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 
 
-
 class POIDataset(Dataset):
     def __init__(self, data_filename, pois_coos_filename, num_users, num_pois, padding_idx, args, device):
 
