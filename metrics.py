@@ -1,5 +1,4 @@
 # coding=utf-8
-
 import numpy as np
 
 def hit_k(y_pred, y_true, k):
